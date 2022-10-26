@@ -61,7 +61,7 @@ awesome.connect_signal('bat::value', function(stat, val)
     M.bat.color = beautiful.fg_minimize
   end
   M.bat.progressbar.value = val
-  M.bat.percentage.markup = '<b>' .. val .. '</b>'
+  M.bat.percentage.markup = '<b>' .. val .. '%' .. '</b>'
 end)
 
 M.vol:connect_signal('property::value', function(val)

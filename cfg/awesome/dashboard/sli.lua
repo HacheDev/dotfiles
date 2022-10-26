@@ -21,13 +21,24 @@ M.vol = wibox.widget {
 }
 
 M.bat = wibox.widget {
-  max_value          = 100,
-  value              = 10,
-  forced_height      = dpi(20),
-  shape              = help.rrect(2),
-  color              = beautiful.pri,
-  background_color   = beautiful.bg_minimize,
-  widget             = wibox.widget.progressbar,
+  {
+    id = 'progressbar',
+    max_value          = 100,
+    value              = 10,
+    forced_height      = dpi(20),
+    shape              = help.rrect(2),
+    color              = beautiful.pri,
+    background_color   = beautiful.bg_minimize,
+    widget             = wibox.widget.progressbar,
+  },
+  {
+    id = 'percentage',
+    markup = '<b>10%</b>',
+    align = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+  },
+  layout = wibox.layout.stack
 }
 
 awesome.connect_signal('bri::value', function(val)
@@ -49,7 +60,8 @@ awesome.connect_signal('bat::value', function(stat, val)
   else
     M.bat.color = beautiful.fg_minimize
   end
-  M.bat.value = val
+  M.bat.progressbar.value = val
+  M.bat.percentage.markup = '<b>' .. val .. '</b>'
 end)
 
 M.vol:connect_signal('property::value', function(val)

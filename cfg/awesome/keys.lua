@@ -33,10 +33,10 @@ keys.globalkeys = gears.table.join(
 
   -- Window management
   awful.key({'Mod1'}, 'Tab', function() awful.client.focus.byidx(1) end),
-  awful.key({mod}, 'Right', function () awful.tag.incmwfact(0.025) end),
-  awful.key({mod}, 'Left', function () awful.tag.incmwfact(-0.025) end),
-  awful.key({mod}, 'Up', function () awful.client.incwfact(0.05) end),
-  awful.key({mod}, 'Down', function () awful.client.incwfact(-0.05) end),
+  awful.key({mod, "Shift"}, 'Right', function () awful.tag.incmwfact(0.025) end),
+  awful.key({mod, "Shift"}, 'Left', function () awful.tag.incmwfact(-0.025) end),
+  awful.key({mod, "Shift"}, 'Up', function () awful.client.incwfact(0.05) end),
+  awful.key({mod, "Shift"}, 'Down', function () awful.client.incwfact(-0.05) end),
 
   -- Applications
   awful.key({mod}, 'Return', function() awful.util.spawn(terminal) end),
@@ -50,7 +50,7 @@ keys.globalkeys = gears.table.join(
   awful.key({ mod,           }, "*", function () awful.spawn("discord") end,
           { description = "Open discord", group = "launcher" }
   ),
-  awful.key({ mod,           }, "p", function () awful.spawn("spotify") end,
+  awful.key({ mod, "Shift"  }, "p", function () awful.spawn("spotify") end,
           { description = "Open spotify", group = "launcher" }
   ),
 
@@ -58,12 +58,60 @@ keys.globalkeys = gears.table.join(
   awful.key({}, 'Print', function() awful.util.spawn('flameshot gui') end)
 )
 
--- Keyboard Control
-keys.clientkeys = gears.table.join(
-  awful.key({mod}, 'q', function(c) c:kill() end),
-  awful.key({mod}, 'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end),
-  awful.key({mod}, 'Tab', function() awful.client.floating.toggle() end)
-)
+-- -- Keyboard Control
+-- keys.clientkeys = gears.table.join(
+--   awful.key({mod}, 'q', function(c) c:kill() end),
+--   awful.key({mod}, 'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end),
+--   awful.key({mod}, 'Tab', function() awful.client.floating.toggle() end)
+-- )
+
+-- Tags related keybindings
+awful.keyboard.append_global_keybindings({
+  awful.key({ mod,           }, "Left",   awful.tag.viewprev,
+            {description = "view previous", group = "tag"}),
+  awful.key({ mod,           }, "Right",  awful.tag.viewnext,
+            {description = "view next", group = "tag"}),
+  awful.key({ mod,           }, "Escape", awful.tag.history.restore,
+            {description = "go back", group = "tag"}),
+})
+
+-- Focus related keybindings
+awful.keyboard.append_global_keybindings({
+  awful.key({ mod,           }, "j",
+      function ()
+          awful.client.focus.byidx( 1)
+      end,
+      {description = "focus next by index", group = "client"}
+  ),
+  awful.key({ mod,           }, "k",
+      function ()
+          awful.client.focus.byidx(-1)
+      end,
+      {description = "focus previous by index", group = "client"}
+  ),
+  awful.key({ mod,           }, "Tab",
+      function ()
+          awful.client.focus.history.previous()
+          if client.focus then
+              client.focus:raise()
+          end
+      end,
+      {description = "go back", group = "client"}),
+  awful.key({ mod, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+            {description = "focus the next screen", group = "screen"}),
+  awful.key({ mod, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+            {description = "focus the previous screen", group = "screen"}),
+  awful.key({ mod, "Control" }, "n",
+            function ()
+                local c = awful.client.restore()
+                -- Focus restored client
+                if c then
+                  c:activate { raise = true, context = "key.unminimize" }
+                end
+            end,
+            {description = "restore minimized", group = "client"}),
+})
+
 
 -- Mouse controls
 keys.clientbuttons = gears.table.join(

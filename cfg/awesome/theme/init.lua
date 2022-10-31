@@ -70,4 +70,6 @@ theme.titlebar_maximized_button_focus_active= theme_path.."maximize.svg"
 
 theme.icon_theme = nil
 
+theme.hotkeys_modifiers_fg = "#283593";
+
 return theme

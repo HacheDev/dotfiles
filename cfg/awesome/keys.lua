@@ -7,9 +7,9 @@ keys.tags = tags
 
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
--- hotkeys_popup.beautiful.hotkeys_modifiers_fg = "#283593"
 
-terminal = "xfce4-terminal"
+
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 editor_gui = "code-insiders"

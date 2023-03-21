@@ -18,21 +18,19 @@
   > Must have, just to make sure everything works properly
 
     ```
-    awesome bluez elogind flameshot kitty mpd mpDris2 nmcli playerctl pulsemixer redshift rofi xbacklight xsettingsd zsh
+    awesome bluez elogind flameshot alacritty mpd mpDris2 nmcli picom playerctl pulsemixer redshift rofi xsettingsd zsh
     ```
 
   > Suggested, makes everything feel complete
 
     ```
-    alacritty firefox ncmpcpp nvim lf zathura
+    kitty firefox ncmpcpp nvim lf zathura
     ```
-
-</details>
 
 - Clone the repo
 
   ```
-  git clone https://github.com/Manas140/dotfiles.git --depth=1 --branch='awedots' && cd dotfiles
+  git clone --recurse-submodules https://github.com/Manas140/dotfiles.git --depth=1 && cd dotfiles
   ```
 
 - Install / Copy all configs
@@ -49,20 +47,17 @@
 | **[Software]**                       | **Action**                 |
 | Print                                | flameshot gui              |
 | Super + r                            | rofi                       |
-| Super + Return                       | kitty                      |
-|                                      |                            |
-| **[Hardware]**                       | **Action**                 |
-| Fn + Arrow [Up,Down]                 | Volume Control             |
-| Fn + Arrow [Left,Right]              | Brightness Control         |
+| Super + Return                       | alacritty                  |
 |                                      |                            |
 | **[AwesomeWm]**                      | **Action**                 |
 | Super + d                            | open dashboard             |
 | Super + q                            | kill focused window        |
 | Alt + Tab                            | toggle window focus        |
+| Super + m                            | minimize focused window    |
 | Super + Tab                          | toggle floating/tiling     |
 | Super + space                        | toggle fullscreen          |
-| Super + [1-9]                        | focus desktop 1-9          |
-| Super + Shift + [1-9]                | move window to desktop 1-9 |
+| Super + [1-5]                        | focus desktop 1-5          |
+| Super + Shift + [1-5]                | move window to desktop 1-5 |
 | Super + Arrow [Up,Down,Left,Right]   | resize window              |
 
 
@@ -75,3 +70,4 @@
 ## Special Thanks
 
   - [Rklyz](https://github.com/rklyz)
+  - [Harry](https://github.com/saimoomedits)

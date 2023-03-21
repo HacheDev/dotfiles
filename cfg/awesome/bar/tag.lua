@@ -1,4 +1,4 @@
-return function(s)  
+return function(s)
   local tag = awful.widget.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.selected,
@@ -8,19 +8,19 @@ return function(s)
         align = 'center',
         widget = wibox.widget.textbox,
       },
-      top = dpi(15),
-      bottom = dpi(15),
-      left = dpi(12),
-      right = dpi(12),
+      top = dpi(10),
+      bottom = dpi(10),
+      left = dpi(15),
+      right = dpi(15),
       widget = wibox.container.margin
     },
     id = 'background_role',
     widget = wibox.container.background,
 
-    create_callback = function(self, c3, index, objects) 
+    create_callback = function(self, _, index, _)
       self:get_children_by_id('text_role').markup = index
     end,
-    update_callback = function(self, c3, index, objects) 
+    update_callback = function(self, _, index, _)
       self:get_children_by_id('text_role').markup = index
     end
   }

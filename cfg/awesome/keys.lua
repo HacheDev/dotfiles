@@ -2,7 +2,7 @@
 local keys = {}
 
 local mod = 'Mod4'
-local tags = 7
+local tags = 5
 keys.tags = tags
 
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -25,11 +25,11 @@ keys.globalkeys = gears.table.join(
   awful.key({ mod,           }, "s",      hotkeys_popup.show_help,
   {description="show help", group="awesome"}),
 
-  --Hardware
-  awful.key({}, 'XF86MonBrightnessUp', function() awful.spawn.with_shell('xbacklight +5') end),
-  awful.key({}, 'XF86MonBrightnessDown', function() awful.spawn.with_shell('xbacklight -5') end),
-  awful.key({}, 'XF86AudioRaiseVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ +5%') end),
-  awful.key({}, 'XF86AudioLowerVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ -4%') end),
+  --Hardware ( Laptop Users )
+  -- awful.key({}, 'XF86MonBrightnessUp', function() awful.spawn.with_shell('xbacklight +5') end),
+  -- awful.key({}, 'XF86MonBrightnessDown', function() awful.spawn.with_shell('xbacklight -5') end),
+  -- awful.key({}, 'XF86AudioRaiseVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ +5%') end),
+  -- awful.key({}, 'XF86AudioLowerVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ -4%') end),
 
   -- Window management
   awful.key({'Mod1'}, 'Tab', function() awful.client.focus.byidx(1) end),

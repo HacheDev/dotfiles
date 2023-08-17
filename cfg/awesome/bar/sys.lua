@@ -1,3 +1,6 @@
+local Sct = require("bar.sct")
+local sct = Sct(6000)
+
 local M = {}
 
 -- Wifi
@@ -14,7 +17,7 @@ M.vol = wibox.widget {
   widget = wibox.widget.textbox,
 }
 
--- Bluethooth
+-- Bluetooth
 M.blu = wibox.widget {
   font = beautiful.icofont,
   align = 'center',
@@ -30,6 +33,16 @@ M.clock = wibox.widget {
   valign = 'center',
   widget = wibox.widget.textclock
 }
+
+-- Battery
+M.bat = wibox.widget {
+  font = beautiful.icofont,
+  align = 'center',
+  widget = wibox.widget.textbox,
+}
+
+-- Sct (screen temperature)
+M.sct = sct
 
 awesome.connect_signal("blu::value", function(stat)
   if stat:match("no") then
@@ -64,6 +77,16 @@ awesome.connect_signal('vol::value', function(mut, val)
   else
     M.vol.opacity = 0.25
     M.vol.markup = ""
+  end
+end)
+
+awesome.connect_signal('bat::value', function(stat, _)
+  if stat:match("Charging") then
+    M.bat.markup = ""
+  elseif stat:match("Full") then
+    M.bat.markup = ""
+  else
+    M.bat.markup = ""
   end
 end)
 

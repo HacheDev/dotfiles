@@ -1,7 +1,7 @@
 -- Variables
 local keys = {}
 
-local mod = 'Mod4'
+local mod = "Mod4"
 local tags = 5
 keys.tags = tags
 
@@ -9,60 +9,63 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 
-terminal = "kitty"
+terminal = "xfce4-terminal"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
-editor_gui = "code-insiders"
-web_browser = os.getenv("BROWSER")
+-- editor_gui = "code-insiders"
+editor_gui = "/opt/pycharm-2022.3.3/bin/pycharm.sh"
+-- web_browser = os.getenv("BROWSER") --this does not work, nosense, should review this
+web_browser = "firefox"
 
 -- Keybindings
 keys.globalkeys = gears.table.join(
   -- Awesome
-  awful.key({mod, 'Shift'}, 'r', awesome.restart),
-  awful.key({mod}, 'd', function() dashboard.toggle() end),
-  awful.key({mod, 'Shift'}, 'e', awesome.quit),
-  awful.key({mod, 'Shift'}, 'l', function() awful.util.spawn('sh ~/.local/bin/lock') end),
+  awful.key({mod, "Shift"}, "r", awesome.restart),
+  awful.key({mod}, "d", function() dashboard.toggle() end),
+  awful.key({mod, "Shift"}, "e", awesome.quit),
+  awful.key({mod, "Shift"}, "l", function() awful.util.spawn("sh ~/.local/bin/lock") end),
   awful.key({ mod,           }, "s",      hotkeys_popup.show_help,
   {description="show help", group="awesome"}),
 
   --Hardware ( Laptop Users )
-  -- awful.key({}, 'XF86MonBrightnessUp', function() awful.spawn.with_shell('xbacklight +5') end),
-  -- awful.key({}, 'XF86MonBrightnessDown', function() awful.spawn.with_shell('xbacklight -5') end),
-  -- awful.key({}, 'XF86AudioRaiseVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ +5%') end),
-  -- awful.key({}, 'XF86AudioLowerVolume', function() awful.spawn.with_shell('pactl set-sink-volume @DEFAULT_SINK@ -4%') end),
+  -- awful.key({}, "XF86MonBrightnessUp", function() awful.spawn.with_shell("xbacklight +5") end),
+  -- awful.key({}, "XF86MonBrightnessDown", function() awful.spawn.with_shell("xbacklight -5") end),
+  -- awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-volume @DEFAULT_SINK@ +5%") end),
+  -- awful.key({}, "XF86AudioLowerVolume", function() awful.spawn.with_shell("pactl set-sink-volume @DEFAULT_SINK@ -4%") end),
 
   -- Window management
-  awful.key({'Mod1'}, 'Tab', function() awful.client.focus.byidx(1) end),
-  awful.key({mod, "Shift"}, 'Right', function () awful.tag.incmwfact(0.025) end),
-  awful.key({mod, "Shift"}, 'Left', function () awful.tag.incmwfact(-0.025) end),
-  awful.key({mod, "Shift"}, 'Up', function () awful.client.incwfact(0.05) end),
-  awful.key({mod, "Shift"}, 'Down', function () awful.client.incwfact(-0.05) end),
+  awful.key({"Mod1"}, "Tab", function() awful.client.focus.byidx(1) end),
+  awful.key({mod, "Shift"}, "Right", function () awful.tag.incmwfact(0.025) end),
+  awful.key({mod, "Shift"}, "Left", function () awful.tag.incmwfact(-0.025) end),
+  awful.key({mod, "Shift"}, "Up", function () awful.client.incwfact(0.05) end),
+  awful.key({mod, "Shift"}, "Down", function () awful.client.incwfact(-0.05) end),
+  -- awful.key({mod, "Shift"}, "x", function () xrandr.xrandr() end)
 
   -- Applications
-  awful.key({mod}, 'Return', function() awful.util.spawn(terminal) end),
-  awful.key({mod}, 'r', function() awful.util.spawn('rofi -show drun') end),
-  awful.key({ mod,           }, "c", function () awful.spawn(editor_gui) end,
+  awful.key({mod}, "Return", function() awful.util.spawn(terminal) end),
+  awful.key({mod}, "r", function() awful.util.spawn("rofi -show drun") end),
+  awful.key({ mod,           }, "e", function () awful.spawn(editor_gui) end,
           { description = "Open text editor with gui", group = "launcher" }
   ),
-  awful.key({ mod,           }, "b", function () awful.spawn(web_browser) end,
+  awful.key({ mod,           }, "w", function () awful.spawn(web_browser) end,
           { description = "Open OS default web browser", group = "launcher" }
   ),
-  awful.key({ mod,           }, "*", function () awful.spawn("discord") end,
-          { description = "Open discord", group = "launcher" }
+  awful.key({ mod,           }, "c", function () awful.spawn("slack") end,
+          { description = "Open slack", group = "launcher" }
   ),
   awful.key({ mod, "Shift"  }, "p", function () awful.spawn("spotify") end,
           { description = "Open spotify", group = "launcher" }
   ),
 
   -- Screenshots
-  awful.key({}, 'Print', function() awful.util.spawn('flameshot gui') end)
+  awful.key({mod, "Shift"}, "s", function() awful.util.spawn("flameshot gui") end)
 )
 
 -- -- Keyboard Control
 -- keys.clientkeys = gears.table.join(
---   awful.key({mod}, 'q', function(c) c:kill() end),
---   awful.key({mod}, 'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end),
---   awful.key({mod}, 'Tab', function() awful.client.floating.toggle() end)
+--   awful.key({mod}, "q", function(c) c:kill() end),
+--   awful.key({mod}, "space", function(c) c.fullscreen = not c.fullscreen; c:raise() end),
+--   awful.key({mod}, "Tab", function() awful.client.floating.toggle() end)
 -- )
 
 -- Tags related keybindings
@@ -125,7 +128,7 @@ for i = 1, tags do
   keys.globalkeys = gears.table.join(keys.globalkeys,
 
   -- View tag
-  awful.key({mod}, '#'..i + 9,
+  awful.key({mod}, "#"..i + 9,
     function ()
       local tag = awful.screen.focused().tags[i]
       if tag then
@@ -134,7 +137,7 @@ for i = 1, tags do
     end),
 
   -- Move window to tag
-  awful.key({mod, 'Shift'}, '#'..i + 9,
+  awful.key({mod, "Shift"}, "#"..i + 9,
     function ()
       if client.focus then
         local tag = client.focus.screen.tags[i]

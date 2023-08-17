@@ -45,6 +45,16 @@ local sliders = wibox.widget {
         spacing = dpi(10),
         layout = wibox.layout.fixed.horizontal
       },
+      {
+        {
+          font = beautiful.icofont,
+          text = '',
+          widget = wibox.widget.textbox,
+        },
+        sli.bat,
+        spacing = dpi(10),
+        layout = wibox.layout.fixed.horizontal
+      },
       -- {
       --   {
       --     font = beautiful.icofont,

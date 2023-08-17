@@ -2,6 +2,7 @@ local M = {}
 
 local vol = [[ str=$( pulsemixer --get-volume ); printf "$(pulsemixer --get-mute) ${str% *}\n" ]]
 local net = [[ printf "$(cat /sys/class/net/w*/operstate)~|~$(nmcli radio wifi)" ]]
+local bat = [[ cat /sys/class/power_supply/BAT*/status; cat /sys/class/power_supply/BAT*/capacity ]]
 local blue = [[ bluetoothctl show | grep "Powered:" ]]
 local fs = [[ df -h --output=used,size / | sed 's/G//g' ]]
 local temp = [[ cat /sys/class/thermal/thermal_zone0/temp ]]
@@ -66,6 +67,14 @@ M.blu = function()
   end)
 end
 
+M.bat = function()
+  awful.spawn.easy_async_with_shell(bat, function(out)
+    local val = {}
+    for i in string.gmatch(out, "%S+") do table.insert(val, i) end
+    awesome.emit_signal('bat::value', val[1], tonumber(val[2]))
+  end)
+end
+
 gears.timer {
   timeout = 5,
   call_now = true,
@@ -76,6 +85,7 @@ gears.timer {
     M.blu()
     M.mem()
     M.temp()
+    M.bat()
     -- M.fs()
   end
 }

@@ -61,6 +61,37 @@ M.temp = wibox.widget {
   widget = wibox.widget.progressbar,
 }
 
+M.bat = wibox.widget {
+  {
+    id = 'progressbar',
+    max_value          = 100,
+    value              = 10,
+    forced_height      = dpi(20),
+    shape              = help.rrect(2),
+    color              = beautiful.pri,
+    background_color   = beautiful.bg_minimize,
+    widget             = wibox.widget.progressbar,
+  },
+  {
+    id = 'percentage',
+    markup = '<b>10%</b>',
+    align = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+  },
+  layout = wibox.layout.stack
+}
+
+awesome.connect_signal('bat::value', function(stat, val)
+  if stat:match("Charging") or stat:match("Full") then
+    M.bat.color = beautiful.pri
+  else
+    M.bat.color = beautiful.fg_minimize
+  end
+  M.bat.progressbar.value = val
+  M.bat.percentage.markup = '<b>' .. val .. '%' .. '</b>'
+end)
+
 awesome.connect_signal('vol::value', function(mut, val)
   if mut == 0 then
     M.vol.handle_color = beautiful.pri

@@ -27,6 +27,8 @@ local sys = wibox.widget {
         sys.net,
         sys.blu,
         sys.vol,
+        sys.bat,
+        sys.sct,
         spacing = dpi(20),
         layout = wibox.layout.fixed.vertical,
       },

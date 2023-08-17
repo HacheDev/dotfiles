@@ -160,11 +160,11 @@ M.nig:buttons(gears.table.join(
     if nig then
       M.nig:get_children_by_id("nig")[1].markup = ""
       M.nig.fg = on
-      awful.spawn.with_shell("redshift -x && redshift -O 4000K")
+      -- awful.spawn.with_shell("redshift -x && redshift -O 4000K")
     else
       M.nig:get_children_by_id("nig")[1].markup = ""
       M.nig.fg = off
-      awful.spawn.with_shell("redshift -x")
+      -- awful.spawn.with_shell("redshift -x")
     end
   end)
 ))

@@ -11,6 +11,7 @@ keys = require('keys')
 help = require('help')
 dashboard = require("dashboard")
 sig = require('signals')
+-- xrandr = require("xrandr")
 
 local req = {
   'notif',
@@ -55,7 +56,7 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 
 -- Autostart
-awful.spawn.with_shell('redshift -x && redshift -O 4000K')
+-- awful.spawn.with_shell('redshift -x && redshift -O 4000K')
 awful.spawn.with_shell('killall flameshot; flameshot')
 awful.spawn.with_shell('killall xsettingsd; xsettingsd &')
 awful.spawn.with_shell('killall mpDris2; mpDris2 &')

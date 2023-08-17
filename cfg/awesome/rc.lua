@@ -19,6 +19,7 @@ local req = {
   'menu',
   'rule',
   'titlebar',
+  'music',
   'client',
   'awful.autofocus',
 }
